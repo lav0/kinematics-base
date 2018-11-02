@@ -3,7 +3,7 @@
 kinematics::JointBase::JointBase(const DHConvention & convention)
   : convention_(convention)
 {
-  jointTrs_ = Matrix(convention_);
+  jointTrs_ = convention_.matrix();
 }
 
 Matrix kinematics::JointBase::transformation() const
@@ -38,7 +38,7 @@ bool kinematics::JointBase::increase(double step)
     }
   }
 
-  jointTrs_ = Matrix(convention_);
+  jointTrs_ = convention_.matrix();
 
   return ok;
 }

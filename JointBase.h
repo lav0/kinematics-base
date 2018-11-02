@@ -3,11 +3,10 @@
 #include <cfloat>
 
 #include "IKinematicsJoint.h"
+#include "DHConvention.h"
 
 namespace kinematics
 {
-  using DHConvention = verybasicmath::DHConvention;
-
   class JointBase : public IJoint
   {
   public:
