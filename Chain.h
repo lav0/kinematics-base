@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IChain.h"
+#include <cassert>
 #include <vector>
 
 namespace kinematics {
@@ -9,12 +10,13 @@ namespace kinematics {
   {
   public:
 
-    bool addJoint(IJoint*) override;
-    size_t size() const override;
+    bool addJoint(const JointPtr&) override;
+    size_t size() const noexcept override;
     Point goForward() override;
+    Point goForwardTo(size_t) override;
 
   private:
 
-    std::vector<IJoint*> chain_;
+    std::vector<JointPtr> chain_;
   };
 }

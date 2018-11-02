@@ -1,4 +1,6 @@
 #pragma once
+
+#include <memory>
 #include "..\VeryBasicMath\Matrix.h"
 
 using Matrix = verybasicmath::Matrix;
@@ -18,3 +20,6 @@ public:
 
   virtual ~IJoint() {}
 };
+
+using JointPtr = std::shared_ptr<IJoint>;
+

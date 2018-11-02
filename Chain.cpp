@@ -1,22 +1,36 @@
 #include "Chain.h"
 
-bool kinematics::Chain::addJoint(IJoint * joint)
+bool kinematics::Chain::addJoint(const JointPtr& joint)
 {
   chain_.push_back(joint);
   return true;
 }
 
-size_t kinematics::Chain::size() const
+size_t kinematics::Chain::size() const noexcept
 {
   return chain_.size();
 }
 
 Point kinematics::Chain::goForward()
 {
-  auto j1 = chain_[0];
-  auto j2 = chain_[1];
+  return goForwardTo(size());
+}
 
-  auto trs = j1->transformation() * j2->relativePosition();
+Point kinematics::Chain::goForwardTo(size_t joint_position)
+{
+  assert(joint_position >= 0);
+  assert(joint_position <= size());
 
-  return trs;
+  if (joint_position <= 0)
+  {
+    return Point();
+  }
+
+  Matrix trs;
+  for (size_t i = 0; i < joint_position - 1; i++)
+  {
+    trs = trs * chain_[i]->transformation();
+  }
+
+  return trs * chain_[joint_position-1]->relativePosition();
 }
