@@ -12,11 +12,16 @@ namespace kinematics
   public:
 
     JointBase(const DHConvention& convention);
+    ~JointBase() override {}
+
     Matrix transformation() const override;
     Point relativePosition() const override;
 
     bool increase(double step) override;
     void setMinMax(double min, double max) override;
+    void getMinMax(double& min, double& max) override;
+
+    double getJointValue() override;
 
   protected:
 

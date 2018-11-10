@@ -3,23 +3,31 @@
 #include <memory>
 #include "..\VeryBasicMath\Matrix.h"
 
-using Matrix = verybasicmath::Matrix;
-using Point = verybasicmath::Point;
-
-class IJoint
+namespace kinematics
 {
-public:
+  using Matrix = verybasicmath::Matrix;
+  using Point = verybasicmath::Point;
 
-  virtual bool isRotary() = 0;
+  class IJoint
+  {
+  public:
 
-  virtual Matrix transformation() const = 0;
-  virtual Point relativePosition() const = 0;
+    virtual bool isRotary() = 0;
 
-  virtual bool increase(double step) = 0;
-  virtual void setMinMax(double min, double max) = 0;
+    virtual Matrix transformation() const = 0;
+    virtual Point relativePosition() const = 0;
 
-  virtual ~IJoint() {}
-};
+    virtual bool increase(double step) = 0;
+    virtual void setMinMax(double min, double max) = 0;
+    virtual void getMinMax(double& min, double& max) = 0;
 
-using JointPtr = std::shared_ptr<IJoint>;
+    ///// access for the solver
+    virtual double getJointValue() = 0;
 
+    virtual std::unique_ptr<IJoint> deepCopy() const = 0;
+
+    virtual ~IJoint() {}
+  };
+
+  using JointPtr = std::shared_ptr<IJoint>;
+}

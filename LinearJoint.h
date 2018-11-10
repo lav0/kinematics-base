@@ -4,13 +4,13 @@
 
 namespace kinematics
 {
-  class RotaryJoint : public JointBase
+  class LinearJoint : public JointBase
   {
   public:
 
-    RotaryJoint(const DHConvention& convention);
+    LinearJoint(const DHConvention& convention);
 
-    bool isRotary() override { return true; }
+    bool isRotary() override { return false; }
 
     std::unique_ptr<IJoint> deepCopy() const override;
 

@@ -1,5 +1,7 @@
 #include "JointBase.h"
 
+using namespace kinematics;
+
 kinematics::JointBase::JointBase(const DHConvention & convention)
   : convention_(convention)
 {
@@ -54,4 +56,14 @@ void kinematics::JointBase::setMinMax(double min, double max)
 
   if (value() < min_)
     value() = min_;
+}
+void kinematics::JointBase::getMinMax(double& min, double& max)
+{
+  min = min_;
+  max = max_;
+}
+
+double kinematics::JointBase::getJointValue()
+{
+  return value();
 }
